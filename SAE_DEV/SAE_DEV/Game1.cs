@@ -15,6 +15,9 @@ namespace SAE_DEV
     {
         private readonly ScreenManager _screenManager;
         public SpriteBatch SpriteBatch { get; set; }
+        Acceuil _acceuil;
+        Jeu _jeu;
+        Fin _fin;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private TiledMap _tiledMap;
@@ -47,6 +50,9 @@ namespace SAE_DEV
 
         protected override void LoadContent()
         {
+            _acceuil = new Acceuil(this); // en leur donnant une référence au Game
+            _jeu = new Jeu(this);
+            _fin = new Fin(this);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _tiledMap = Content.Load<TiledMap>("mapGenerale");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
@@ -59,6 +65,17 @@ namespace SAE_DEV
 
         protected override void Update(GameTime gameTime)
         {
+            /*KeyboardState keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.Left))
+            {
+                _screenManager.LoadScreen(_myScreen1, new FadeTransition(GraphicsDevice,
+                Color.Black));
+            }
+            else if (keyboardState.IsKeyDown(Keys.Right))
+            {
+                _screenManager.LoadScreen(_myScreen2, new FadeTransition(GraphicsDevice,
+                Color.Black));
+            }*/
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
