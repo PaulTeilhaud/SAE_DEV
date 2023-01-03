@@ -1,16 +1,20 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
+using MonoGame.Extended.Screens;
 
 namespace SAE_DEV
 {
     public class Game1 : Game
     {
+        private readonly ScreenManager _screenManager;
+        public SpriteBatch SpriteBatch { get; set; }
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private TiledMap _tiledMap;
@@ -27,6 +31,8 @@ namespace SAE_DEV
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            _screenManager = new ScreenManager();
+            Components.Add(_screenManager);
         }
 
         protected override void Initialize()
