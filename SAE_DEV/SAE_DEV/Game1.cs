@@ -59,7 +59,7 @@ namespace SAE_DEV
         protected override void Update(GameTime gameTime)
         {
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
-            /*KeyboardState keyboardState = Keyboard.GetState();
+            KeyboardState keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.Left))
             {
                 _screenManager.LoadScreen(_acceuil, new FadeTransition(GraphicsDevice,
