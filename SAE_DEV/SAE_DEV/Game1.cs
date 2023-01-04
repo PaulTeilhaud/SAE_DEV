@@ -29,6 +29,7 @@ namespace SAE_DEV
         private int _vitessePerso;
         public const int TAILLE_FENETRE = 640;
 
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -65,6 +66,7 @@ namespace SAE_DEV
 
         protected override void Update(GameTime gameTime)
         {
+            GraphicsDevice.BlendState = BlendState.AlphaBlend;
             /*KeyboardState keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.Left))
             {
