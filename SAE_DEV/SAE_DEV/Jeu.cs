@@ -11,13 +11,19 @@ using MonoGame.Extended.Screens;
 
 namespace SAE_DEV
 {
-    public class Game1 : Game
-    {
-        private readonly ScreenManager _screenManager;
-        public SpriteBatch SpriteBatch { get; set; }
-        Acceuil _acceuil;
-        Jeu _jeu;
-        Fin _fin;
+
+        public class Jeu : Game
+        {
+            private Game1 _myGame;
+        // pour récupérer une référence à l’objet game pour avoir accès à tout ce qui est
+        // défini dans Game1
+        public Jeu(Game1 game) : base(game)
+        {
+            _myGame = game;
+            _graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+            IsMouseVisible = true;
+        }
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private TiledMap _tiledMap;
@@ -28,15 +34,7 @@ namespace SAE_DEV
         private int _sensPerso;
         private int _vitessePerso;
         public const int TAILLE_FENETRE = 640;
-
-        public Game1()
-        {
-            _graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-            IsMouseVisible = true;
-            _screenManager = new ScreenManager();
-            Components.Add(_screenManager);
-        }
+                  
 
         protected override void Initialize()
         {
@@ -50,9 +48,7 @@ namespace SAE_DEV
 
         protected override void LoadContent()
         {
-            _acceuil = new Acceuil(this); // en leur donnant une référence au Game
-            _jeu = new Jeu(this);
-            _fin = new Fin(this);
+            
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _tiledMap = Content.Load<TiledMap>("mapGenerale");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
@@ -65,17 +61,7 @@ namespace SAE_DEV
 
         protected override void Update(GameTime gameTime)
         {
-            /*KeyboardState keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.Left))
-            {
-                _screenManager.LoadScreen(_myScreen1, new FadeTransition(GraphicsDevice,
-                Color.Black));
-            }
-            else if (keyboardState.IsKeyDown(Keys.Right))
-            {
-                _screenManager.LoadScreen(_myScreen2, new FadeTransition(GraphicsDevice,
-                Color.Black));
-            }*/
+            
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
@@ -108,7 +94,7 @@ namespace SAE_DEV
             }
             base.Update(gameTime);
         }
-    
+
 
         protected override void Draw(GameTime gameTime)
         {
