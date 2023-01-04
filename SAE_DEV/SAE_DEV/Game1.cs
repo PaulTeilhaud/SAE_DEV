@@ -21,14 +21,7 @@ namespace SAE_DEV
         Fin _fin;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private TiledMap _tiledMap;
-        private TiledMapRenderer _tiledMapRenderer;
-        private Vector2 _positionPerso;
-        private AnimatedSprite _perso;
-        private KeyboardState _keyboardState;
-        private int _sensPerso;
-        private int _vitessePerso;
-        public const int TAILLE_FENETRE = 640;
+       
 
 
         public Game1()
