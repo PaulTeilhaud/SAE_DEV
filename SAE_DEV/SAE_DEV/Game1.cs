@@ -19,7 +19,17 @@ namespace SAE_DEV
         Acceuil _acceuil;
         Jeu _jeu;
         Fin _fin;
-        
+        private GraphicsDeviceManager _graphics;
+        private SpriteBatch _spriteBatch;
+        private TiledMap _tiledMap;
+        private TiledMapRenderer _tiledMapRenderer;
+        private Vector2 _positionPerso;
+        private AnimatedSprite _perso;
+        private KeyboardState _keyboardState;
+        private int _sensPerso;
+        private int _vitessePerso;
+        public const int TAILLE_FENETRE = 640;
+
 
         public Game1()
         {
@@ -48,7 +58,8 @@ namespace SAE_DEV
 
         protected override void Update(GameTime gameTime)
         {
-            KeyboardState keyboardState = Keyboard.GetState();
+            GraphicsDevice.BlendState = BlendState.AlphaBlend;
+            /*KeyboardState keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.Left))
             {
                 _screenManager.LoadScreen(_acceuil, new FadeTransition(GraphicsDevice,
