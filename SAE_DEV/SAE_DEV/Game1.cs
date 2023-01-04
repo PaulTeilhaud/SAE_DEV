@@ -21,7 +21,7 @@ namespace SAE_DEV
         Fin _fin;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-       
+        
 
 
         public Game1()
@@ -43,7 +43,7 @@ namespace SAE_DEV
             _acceuil = new Acceuil(this); // en leur donnant une référence au Game
             _jeu = new Jeu(this);
             _fin = new Fin(this);
-            
+            _spriteBatch.Draw(ButtonTexture, ButtonRectangle, Color.White);
 
 
             // TODO: use this.Content to load your game content here
@@ -53,21 +53,27 @@ namespace SAE_DEV
         {
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             KeyboardState keyboardState = Keyboard.GetState();
+            ButtonRectangle = new Rectangle(ScreenX * 0.4, ScreenY * 0.5, ScreenX * 0.1, ScreenY * 0.1);
             if (keyboardState.IsKeyDown(Keys.Left))
             {
                 _screenManager.LoadScreen(_acceuil, new FadeTransition(GraphicsDevice,
                 Color.Black));
             }
-            else if (keyboardState.IsKeyDown(Keys.Down))
+            MouseState mouse = Mouse.GetState();
+            if (ButtonRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed)
             {
-                _screenManager.LoadScreen(_jeu, new FadeTransition(GraphicsDevice,Color.Black));
+                //do stuff
+
+                else if (keyboardState.IsKeyDown(Keys.Down))
+                {
+                    _screenManager.LoadScreen(_jeu, new FadeTransition(GraphicsDevice, Color.Black));
+                }
+                else if (keyboardState.IsKeyDown(Keys.Right))
+                {
+                    _screenManager.LoadScreen(_fin, new FadeTransition(GraphicsDevice,
+                    Color.Black));
+                }
             }
-            else if (keyboardState.IsKeyDown(Keys.Right))
-            {
-                _screenManager.LoadScreen(_fin, new FadeTransition(GraphicsDevice,
-                Color.Black));
-            }
-            
 
            
             base.Update(gameTime);
