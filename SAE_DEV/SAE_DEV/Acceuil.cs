@@ -26,7 +26,7 @@ namespace SAE_DEV
         { }
         public override void Draw(GameTime gameTime)
         {
-            _myGame.GraphicsDevice.Clear(Color.Red); // on utilise la reference vers
+            _myGame.GraphicsDevice.Clear(Color.Blue); // on utilise la reference vers
                                                      // Game1 pour chnager le graphisme
         }
     }

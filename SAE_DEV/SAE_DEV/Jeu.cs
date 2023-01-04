@@ -8,11 +8,12 @@ using MonoGame.Extended.Content;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Screens;
+using System;
 
 namespace SAE_DEV
 {
 
-        public class Jeu : Game
+        public class Jeu : GameScreen
         {
             private Game1 _myGame;
         // pour récupérer une référence à l’objet game pour avoir accès à tout ce qui est
@@ -20,7 +21,7 @@ namespace SAE_DEV
         public Jeu(Game1 game) : base(game)
         {
             _myGame = game;
-            _graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(_myGame);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -33,10 +34,11 @@ namespace SAE_DEV
         private KeyboardState _keyboardState;
         private int _sensPerso;
         private int _vitessePerso;
+        private bool IsMouseVisible;
         public const int TAILLE_FENETRE = 640;
                   
 
-        protected override void Initialize()
+        public override void Initialize()
         {
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _positionPerso = new Vector2(20, 340);
@@ -46,7 +48,7 @@ namespace SAE_DEV
             base.Initialize();
         }
 
-        protected override void LoadContent()
+        public override void LoadContent()
         {
             
             _spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -59,7 +61,7 @@ namespace SAE_DEV
             // TODO: use this.Content to load your game content here
         }
 
-        protected override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -92,11 +94,15 @@ namespace SAE_DEV
                 _sensPerso = 1;
                 _positionPerso.Y -= _sensPerso * _vitessePerso * deltaSeconds;
             }
-            base.Update(gameTime);
+            Update(gameTime);
         }
 
+        private void Exit()
+        {
+            throw new NotImplementedException();
+        }
 
-        protected override void Draw(GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
@@ -105,7 +111,7 @@ namespace SAE_DEV
             _spriteBatch.Begin();
             _spriteBatch.Draw(_perso, _positionPerso);
             _spriteBatch.End();
-            base.Draw(gameTime);
+            Draw(gameTime);
         }
     }
 }

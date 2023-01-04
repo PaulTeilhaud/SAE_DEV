@@ -56,7 +56,7 @@ namespace SAE_DEV
             }
             else if (keyboardState.IsKeyDown(Keys.Down))
             {
-                _screenManager.LoadGame(_jeu, new FadeTransition(GraphicsDevice,Color.Black));
+                _screenManager.LoadScreen(_jeu, new FadeTransition(GraphicsDevice,Color.Black));
             }
             else if (keyboardState.IsKeyDown(Keys.Right))
             {
